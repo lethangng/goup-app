@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       title: 'Goup App',
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: ColorApp.colorBlack2,
+        // primaryColor: ColorApp.colorBlack2,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: ColorApp.colorGrey2,
         ),
