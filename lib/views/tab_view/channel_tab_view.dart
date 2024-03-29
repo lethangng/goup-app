@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../utils/color_app.dart';
 import '../../view_models/tab_view_models/channel_tabs/channel_tab_view_model.dart';
+import 'channel_tabs/gioi_thieu_tab.dart';
 import 'home_tabs/exam_tab.dart';
 import 'home_tabs/linh_vat_tab.dart';
 
@@ -136,9 +137,7 @@ class ChannelTabView extends StatelessWidget {
                     children: [
                       LinhVatTab(),
                       Examtab(),
-                      Container(
-                        child: const Text('OK'),
-                      ),
+                      const GioiThieuTab(),
                     ],
                   ),
                 ),

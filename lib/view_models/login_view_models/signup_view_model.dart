@@ -13,7 +13,6 @@ class SignUpViewModel extends GetxController {
     confirmPassword: '',
   ).obs;
   final RxBool showPassword = false.obs;
-  final RxBool showConfirmPassword = false.obs;
 
   void handleShowPassword() {
     showPassword.value = !showPassword.value;

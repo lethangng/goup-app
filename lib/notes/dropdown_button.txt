@@ -1,0 +1,92 @@
+wrapContainer(
+                title: 'Thuộc linh vật:',
+                widget: Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Goupee #01',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    IconButton(
+                      onPressed: () {},
+                      style: IconButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      icon: SvgPicture.asset('assets/icons/arrow-down.svg'),
+                    ),
+                    const SizedBox(width: 12),
+                    IconButton(
+                      onPressed: () {},
+                      style: IconButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      icon: SvgPicture.asset('assets/icons/add-2.svg'),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: size.width * 0.8,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SvgPicture.asset('assets/icons/arrow-wrapper.svg'),
+                            const SizedBox(width: 20),
+                          ],
+                        ),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF3F3F40),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <String>[
+                              'Goupee #01',
+                              'Goupee #02',
+                              'Goupee #03',
+                              'Goupee #04',
+                            ]
+                                .map(
+                                  (item) => Column(
+                                    children: [
+                                      Text(
+                                        item,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: size.width * 0.07),
+                ],
+              ),

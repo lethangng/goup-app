@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app/app.dart';
+import 'services/notification_service.dart';
 // import 'firebase_options.dart';
 // import 'services/api/firebase_api.dart';
 
@@ -14,6 +15,8 @@ void main() async {
       statusBarColor: Colors.transparent,
     ),
   );
+  await NotificationService.initializeNotification();
+
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );

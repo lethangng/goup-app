@@ -11,7 +11,7 @@ class SplashViewModel extends GetxController {
 
   void goToRegisterScreen() {
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offAllNamed(Routes.register);
+      Get.offAllNamed(Routes.home);
     });
   }
 }

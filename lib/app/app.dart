@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../utils/color_app.dart';
-// import '../utils/themes.dart';
+import '../view_models/controller_bindings.dart';
 import 'routes.dart';
 
 class App extends StatelessWidget {
@@ -12,6 +11,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: ControllerBindings(),
       title: 'Goup App',
       theme: ThemeData(
         useMaterial3: true,

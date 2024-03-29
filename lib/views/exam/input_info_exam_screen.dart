@@ -1,11 +1,16 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../app/routes.dart';
 import '../../utils/color_app.dart';
+import '../../view_models/exam/input_info_exam_view_model.dart';
 
 class InputInfoExamScreen extends StatelessWidget {
   InputInfoExamScreen({super.key});
+  final InputInfoExamViewModel inputInfoExamViewModel =
+      Get.put(InputInfoExamViewModel());
 
   final TextEditingController nameExamCotroller = TextEditingController();
   final TextEditingController desCotroller = TextEditingController();
@@ -227,128 +232,211 @@ class InputInfoExamScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              wrapContainer(
-                title: 'Thuộc linh vật:',
-                widget: Row(
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        'Goupee #01',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    IconButton(
-                      onPressed: () {},
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      icon: SvgPicture.asset('assets/icons/arrow-down.svg'),
-                    ),
-                    const SizedBox(width: 12),
-                    IconButton(
-                      onPressed: () {},
-                      style: IconButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      icon: SvgPicture.asset('assets/icons/add-2.svg'),
-                    ),
-                  ],
+              const SizedBox(height: 12),
+              const Text(
+                'Thuộc linh vật:',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFFC1C1CD),
                 ),
               ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: size.width * 0.8,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+              const SizedBox(height: 4),
+              Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: Obx(
+                    () => DropdownButton2<String>(
+                      items: inputInfoExamViewModel.listData
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: inputInfoExamViewModel.dropdownValue.value,
+                      onChanged: (String? newValue) =>
+                          inputInfoExamViewModel.onChangSelect(newValue),
+                      customButton: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            width: 1,
+                            color: const Color(0xFF636363),
+                          ),
+                        ),
+                        child: Row(
                           children: [
-                            SvgPicture.asset('assets/icons/arrow-wrapper.svg'),
-                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Text(
+                                inputInfoExamViewModel.dropdownValue.value,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            SvgPicture.asset('assets/icons/arrow-down.svg'),
+                            const SizedBox(width: 12),
+                            IconButton(
+                              onPressed: () {},
+                              style: IconButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              icon: SvgPicture.asset('assets/icons/add-2.svg'),
+                            ),
                           ],
                         ),
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF3F3F40),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <String>[
-                              'Goupee #01',
-                              'Goupee #02',
-                              'Goupee #03',
-                              'Goupee #04',
-                            ]
-                                .map(
-                                  (item) => Column(
-                                    children: [
-                                      Text(
-                                        item,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                      ),
+                      dropdownStyleData: DropdownStyleData(
+                        maxHeight: size.height * 0.2,
+                        width: size.width * 0.8,
+                        padding: EdgeInsets.zero,
+                        elevation: 0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF3F3F40),
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                      ],
+                        offset: const Offset(20, -10),
+                        scrollbarTheme: ScrollbarThemeData(
+                          radius: const Radius.circular(40),
+                          thickness: WidgetStateProperty.all(3),
+                          thumbVisibility: WidgetStateProperty.all(true),
+                          thumbColor: WidgetStateProperty.all(Colors.white),
+                        ),
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          // vertical: 8,
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(width: size.width * 0.07),
-                ],
+                ),
               ),
-              // Container(
-              //   width: 200,
-              //   height: 40,
-              //   decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(12)),
-              //   child: CustDropDown(
-              //     items: const [
-              //       CustDropdownMenuItem(
-              //         value: 0,
-              //         child: Text("Day"),
-              //       ),
-              //       CustDropdownMenuItem(
-              //         value: 0,
-              //         child: Text("Week"),
-              //       )
-              //     ],
-              //     hintText: "DropDown",
-              //     borderRadius: 5,
-              //     onChanged: (val) {
-              //       print(val);
-              //     },
-              //   ),
-              // ),
-              Container(
-                height: 100,
-                color: Colors.red,
+              const SizedBox(height: 12),
+              const Text(
+                'Cấu hình đề thi:',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFFC1C1CD),
+                ),
               ),
-              const SizedBox(
-                height: 200,
+              const SizedBox(height: 4),
+              Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: Obx(
+                    () => DropdownButton2<String>(
+                      isExpanded: true,
+                      items: inputInfoExamViewModel.listDataExam
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: inputInfoExamViewModel.dropdownValueExam.value,
+                      onChanged: (String? newValue) =>
+                          inputInfoExamViewModel.onChangSelectExam(newValue),
+                      customButton: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            width: 1,
+                            color: const Color(0xFF636363),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                inputInfoExamViewModel.dropdownValueExam.value,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            SvgPicture.asset('assets/icons/arrow-down.svg'),
+                          ],
+                        ),
+                      ),
+                      dropdownStyleData: DropdownStyleData(
+                        maxHeight: size.height * 0.25,
+                        width: size.width * 0.8,
+                        padding: EdgeInsets.zero,
+                        elevation: 0,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF3F3F40),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        offset: const Offset(20, -10),
+                        scrollbarTheme: ScrollbarThemeData(
+                          radius: const Radius.circular(40),
+                          thickness: WidgetStateProperty.all(6),
+                          thumbVisibility: WidgetStateProperty.all(true),
+                        ),
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          // vertical: 8,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
+              const SizedBox(height: 60),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () => Get.toNamed(Routes.exportExamSusscess),
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xFFFF6E47),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                  child: const Text(
+                    'Tiếp theo',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

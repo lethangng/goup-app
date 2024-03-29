@@ -43,7 +43,7 @@ class HomeTabView extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: IconButton(
-                onPressed: () {
+                onPressed: () async {
                   homeTabViewModel.handleShowMenuBar();
                 },
                 icon: SvgPicture.asset(
