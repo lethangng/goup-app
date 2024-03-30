@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../services/notification_service.dart';
 
-class Controller extends GetxController {
+class ControllerNotification extends GetxController {
   void pushNotification() {
     Timer.periodic(const Duration(minutes: 1), (timer) async {
       await NotificationService.showNotification(

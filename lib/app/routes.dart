@@ -12,6 +12,7 @@ import '../views/exam/view_exam_screen.dart';
 import '../views/login_view/accuracy_otp_screen.dart';
 import '../views/login_view/forgot_password_screen.dart';
 import '../views/login_view/new_password_screen.dart';
+import '../views/login_view/register_2_screen.dart';
 import '../views/login_view/register_screen.dart';
 import '../views/login_view/signup_screen.dart';
 import '../views/login_view/splash_screen.dart';
@@ -39,6 +40,7 @@ class Routes {
   static const createExam2 = '/create-exam-2';
 
   static final routes = [
+    GetPage(name: splashScreen, page: () => Resgiter2Screen()),
     GetPage(name: splashScreen, page: () => SplashScreen()),
     GetPage(name: home, page: () => MainWrapper()),
     GetPage(name: create, page: () => CreateExamScreen()),
